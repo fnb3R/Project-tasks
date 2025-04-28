@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Quiz</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+    .question {
+      margin-bottom: 2rem;
+    }
+    .options button {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      width: fit-content;
+    }
+    .feedback {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    #nextBtn {
+      display: none;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🤔 DOM Traversal Quiz</h1>
+
+  <div id="page">
+    <div id="header">
+      <h2 id="title">Page Title</h2>
+    </div>
+    <div id="content">
+      <h3>Content Title</h3>
+      <p>Some copy goes here</p>
+      <p>Some copy goes here</p>
+    </div>
+  </div>
+
+  <div class="question" id="questionBox">
+    <p id="questionText">Loading question...</p>
+    <div class="options" id="optionsBox"></div>
+    <div class="feedback" id="feedbackBox"></div>
+    <button id="nextBtn" onclick="nextQuestion()">Следващ въпрос</button>
+  </div>
+
+  <script>
+    const header = document.getElementById("header");
+    const content = document.getElementById("content");
+    const title = document.getElementById("title");
+    const page = document.getElementById("page");
+
+    const questions = [
+      {
+        question: "Какво връща `firstChild` на #page?",
+        correct: "#text (празен интервал или нов ред)",
+        options: [
+          "<div id='header'>",
+          "#text (празен интервал или нов ред)",
+          "<h2 id='title'>",
+          "undefined"
+        ]
+      },
+      {
+        question: "Какво е `nextElementSibling` на #header?",
+        correct: "<div id='content'>",
+        options: [
+          "#text",
+          "<div id='content'>",
+          "null",
+          "<p>"
+        ]
+      },
+      {
+        question: "Какво връща `parentNode` на #title?",
+        correct: "<div id='header'>",
+        options: [
+          "<div id='header'>",
+          "<div id='content'>",
+          "<body>",
+          "#page"
+        ]
+      },
+      {
+        question: "Колко елемента съдържа `children` на #content?",
+        correct: "3",
+        options: ["2", "3", "5", "0"]
+      },
+      {
+        question: "Какво връща `previousSibling` на #content?",
+        correct: "#text (интервал или нов ред)",
+        options: [
+          "<div id='header'>",
+          "null",
+          "#text (интервал или нов ред)",
+          "<h2>"
+        ]
+      }
+    ];
+
+    let current = 0;
+
+    function showQuestion() {
+      const q = questions[current];
+      document.getElementById("questionText").textContent = q.question;
+      const optionsBox = document.getElementById("optionsBox");
+      const feedbackBox = document.getElementById("feedbackBox");
+      optionsBox.innerHTML = "";
+      feedbackBox.textContent = "";
+      document.getElementById("nextBtn").style.display = "none";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option, q.correct);
+        optionsBox.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(answer, correct) {
+      const feedback = document.getElementById("feedbackBox");
+      if (answer === correct) {
+        feedback.textContent = "✅ Вярно!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = `❌ Грешно. Верният отговор е: ${correct}`;
+        feedback.style.color = "red";
+      }
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById("questionBox").innerHTML =
+          "<h2>🎉 Поздравления! Завърши теста.</h2>";
+      }
+    }
+
+    // Start quiz
+    showQuestion();
+  </script>
+</body>
+</html>

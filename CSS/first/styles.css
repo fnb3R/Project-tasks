@@ -1,0 +1,43 @@
+body {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(2, 150px);
+    gap: 10px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    height: 160px;
+}
+
+/* Първи ред */
+.item1 { background: #ff7f7f; grid-column: span 3; }
+.item2 { background: #7f7fff; grid-column: span 1; }
+.item3 { background: #7fbf7f; grid-column: span 3; }
+.item4 { background: #bf7fbf; grid-column: span 1; }
+.item5 { background: #ffdf7f; grid-column: span 3; }
+.item6 { background: #7fffff; grid-column: span 1; }
+
+/* Втори ред */
+.item7 { background: #ff7f7f; grid-column: span 3; grid-row: 2; }
+.item8 { background: #7f7fff; grid-column: span 3; grid-row: 2; }
+.item9 { background: #7fbf7f; grid-column: span 1; grid-row: 2; }
+.item10 { background: #bf7fbf; grid-column: span 3; grid-row: 2; }
+.item11 { background: #ffdf7f; grid-column: span 1; grid-row: 2; }
+.item12 { background: #7fffff; grid-column: span 1; grid-row: 2; }

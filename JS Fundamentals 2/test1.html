@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DOM Traversal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+    }
+    button {
+      margin: 0.25rem;
+      padding: 0.5rem;
+    }
+    #output {
+      margin-top: 1rem;
+      background-color: #f0f0f0;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>DOM Traversal Exercise</h1>
+
+  <div id="page">
+    <div id="header">
+      <h2 id="title">Page Title</h2>
+    </div>
+    <div id="content">
+      <h3>Content Title</h3>
+      <p>Some copy goes here</p>
+      <p>Some copy goes here</p>
+    </div>
+  </div>
+
+  <div>
+    <button onclick="showFirstChild()">firstChild</button>
+    <button onclick="showLastChild()">lastChild</button>
+    <button onclick="showNextSibling()">nextSibling</button>
+    <button onclick="showPreviousSibling()">previousSibling</button>
+    <button onclick="showParentNode()">parentNode</button>
+    <button onclick="showChildNodes()">childNodes</button>
+  </div>
+
+  <div id="output"><strong>Резултатите ще се покажат тук...</strong></div>
+
+  <script>
+    const page = document.getElementById("page");
+    const header = document.getElementById("header");
+    const content = document.getElementById("content");
+    const title = document.getElementById("title");
+    const output = document.getElementById("output");
+
+    function showFirstChild() {
+      output.innerHTML = "📌 <strong>firstChild на #page:</strong><br>" + formatNode(page.firstChild);
+    }
+
+    function showLastChild() {
+      output.innerHTML = "📌 <strong>lastChild на #page:</strong><br>" + formatNode(page.lastChild);
+    }
+
+    function showNextSibling() {
+      output.innerHTML = "📌 <strong>nextSibling на #header:</strong><br>" + formatNode(header.nextSibling);
+    }
+
+    function showPreviousSibling() {
+      output.innerHTML = "📌 <strong>previousSibling на #content:</strong><br>" + formatNode(content.previousSibling);
+    }
+
+    function showParentNode() {
+      output.innerHTML = "📌 <strong>parentNode на #title:</strong><br>" + formatNode(title.parentNode);
+    }
+
+    function showChildNodes() {
+      let childList = Array.from(content.childNodes)
+        .map(node => "• " + formatNode(node))
+        .join("<br>");
+      output.innerHTML = "📌 <strong>childNodes на #content:</strong><br>" + childList;
+    }
+
+    function formatNode(node) {
+      if (!node) return "❌ Няма възел.";
+      if (node.nodeType === Node.TEXT_NODE) {
+        return `#text (съдържание: "${node.textContent.trim()}")`;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        return `&lt;${node.tagName.toLowerCase()}&gt; (id: ${node.id || "няма"})`;
+      } else {
+        return `Друг тип възел: ${node.nodeName}`;
+      }
+    }
+  </script>
+</body>
+</html>

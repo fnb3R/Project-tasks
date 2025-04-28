@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript OOP Test</title>
+</head>
+<body>
+    <h1>Test JavaScript OOP</h1>
+    <script src="jsoop.js"></script>
+    <script>
+        const sword = new Sword('Excalibur', 10000, 'fire', true);
+        console.log(sword.getItemInfo());
+
+        const helm = new Helm('Golden Helm', 5000, 'fire', 3);
+        console.log(helm.getItemInfo());
+
+        const consumable = new Consumable('Healing Potion', true, 'medium');
+        console.log(consumable.getItemInfo());
+    </script>
+</body>
+</html>

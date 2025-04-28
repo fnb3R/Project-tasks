@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f3f3;
+    margin: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(16, 32px);
+    grid-template-rows: repeat(15, 32px); 
+    gap: 2px; 
+}
+
+.square {
+    width: 32px;
+    height: 32px;
+}
+
+.blue { background-color: blue; }
+.black { background-color: black; }
+.red { background-color: red; }
